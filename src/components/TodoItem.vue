@@ -4,18 +4,20 @@
       <input type="checkbox" v-model="todo.completed" />
       <div>{{ todo.title }}</div>
     </div>
-    <button v-on:click="removeTodo(todo);">x</button>
+    <button v-on:click="removeTodos(index);">x</button>
   </li>
 </template>
 
 <script>
+import { mapState, mapMutations, mapActions } from "vuex";
+
 export default {
   name: "TodoItem",
-  props: ["todo"],
+  props: ["todo", "index"],
   methods: {
-    removeTodo: function(todo) {
-      // this.todos.push({ title: todo, completed: false });
-      console.log(todo);
+    ...mapActions(["removeTodo"]),
+    removeTodos: function(index) {
+      this.removeTodo(index);
     }
   }
 };

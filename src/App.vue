@@ -1,24 +1,20 @@
 <template>
   <div id="app">
-    <AddTodoForm v-on:addTodo="addTodoToList" />
-    <TodosList v-bind:todos="todos" />
+    <AddTodoForm v-on:addTodo="addTodoToList" /> <TodosList /> <Status />
   </div>
 </template>
 
 <script>
 import AddTodoForm from "./components/AddTodoForm";
 import TodosList from "./components/TodosList";
+import Status from "./components/Status";
 
 export default {
   name: "App",
-  data: function() {
-    return {
-      todos: []
-    };
-  },
   components: {
     AddTodoForm,
-    TodosList
+    TodosList,
+    Status
   },
   methods: {
     addTodoToList: function(todo) {

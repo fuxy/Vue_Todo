@@ -5,6 +5,8 @@
 </template>
 
 <script>
+import { mapState, mapMutations } from "vuex";
+
 export default {
   name: "AddTodoForm",
   data: function() {
@@ -13,10 +15,11 @@ export default {
     };
   },
   methods: {
+    ...mapMutations(["ADD_TODO"]),
     addTodo: function(e) {
       if (this.newTodo.trim().length == 0) return;
 
-      this.$emit("addTodo", this.newTodo);
+      this.ADD_TODO(this.newTodo);
       this.newTodo = "";
       e.preventDefault();
     }

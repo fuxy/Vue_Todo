@@ -1,15 +1,23 @@
 <template>
   <ul>
-    <TodoItem v-for="(todo, index) in todos" :todo="todo" :key="index" />
+    <TodoItem
+      v-for="(todo, index) in todos"
+      :todo="todo"
+      :index="index"
+      :key="index"
+    />
   </ul>
 </template>
 
 <script>
 import TodoItem from "./TodoItem";
+import { mapState } from "vuex";
 
 export default {
   name: "TodoList",
-  props: ["todos"],
+  computed: {
+    ...mapState(["todos"])
+  },
   components: {
     TodoItem
   }
@@ -18,7 +26,7 @@ export default {
 
 <style>
 ul {
-  margin: 0 auto;
+  margin: 10px auto 0;
   padding: 0;
   list-style: none;
   width: 100%;
