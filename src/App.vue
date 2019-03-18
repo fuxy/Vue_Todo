@@ -1,0 +1,41 @@
+<template>
+  <div id="app">
+    <AddTodoForm v-on:addTodo="addTodoToList" />
+    <TodosList v-bind:todos="todos" />
+  </div>
+</template>
+
+<script>
+import AddTodoForm from "./components/AddTodoForm";
+import TodosList from "./components/TodosList";
+
+export default {
+  name: "App",
+  data: function() {
+    return {
+      todos: []
+    };
+  },
+  components: {
+    AddTodoForm,
+    TodosList
+  },
+  methods: {
+    addTodoToList: function(todo) {
+      this.todos.push({ title: todo, completed: false });
+    }
+  }
+};
+</script>
+
+<style>
+#app {
+  font-family: "Avenir", Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-align: center;
+  color: #2c3e50;
+  margin: 60px auto 0;
+  width: 300px;
+}
+</style>
