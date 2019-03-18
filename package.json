@@ -1,5 +1,5 @@
 {
-  "name": "codesandbox",
+  "name": "vue-vuex-todolist",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -36,5 +36,7 @@
       "autoprefixer": {}
     }
   },
-  "browserslist": ["> 1%", "last 2 versions", "not ie <= 8"]
+  "browserslist": ["> 1%", "last 2 versions", "not ie <= 8"],
+  "keywords": [],
+  "description": ""
 }
