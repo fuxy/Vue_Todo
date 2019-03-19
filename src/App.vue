@@ -1,5 +1,6 @@
 <template>
   <div id="app">
+    <h1>Todo list</h1>
     <AddTodoForm v-on:addTodo="addTodoToList" /> <TodosList /> <Status />
     <Loading />
   </div>
