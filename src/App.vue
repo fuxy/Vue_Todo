@@ -1,6 +1,7 @@
 <template>
   <div id="app">
     <AddTodoForm v-on:addTodo="addTodoToList" /> <TodosList /> <Status />
+    <Loading />
   </div>
 </template>
 
@@ -8,13 +9,15 @@
 import AddTodoForm from "./components/AddTodoForm";
 import TodosList from "./components/TodosList";
 import Status from "./components/Status";
+import Loading from "./components/Loading";
 
 export default {
   name: "App",
   components: {
     AddTodoForm,
     TodosList,
-    Status
+    Status,
+    Loading
   },
   methods: {
     addTodoToList: function(todo) {

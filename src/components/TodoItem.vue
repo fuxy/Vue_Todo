@@ -4,7 +4,7 @@
       <input type="checkbox" v-model="todo.completed" />
       <div>{{ todo.title }}</div>
     </div>
-    <button v-on:click="removeTodos(index);">x</button>
+    <button class="remove" v-on:click="remove(index);">&times;</button>
   </li>
 </template>
 
@@ -16,13 +16,16 @@ export default {
   props: ["todo", "index"],
   methods: {
     ...mapActions(["removeTodo"]),
-    removeTodos: function(index) {
+    remove: function(index) {
       this.removeTodo(index);
     }
   }
 };
 </script>
 <style>
+li {
+  border-bottom: 1px solid lightgray;
+}
 li,
 li > div {
   display: flex;
@@ -36,5 +39,12 @@ li > div {
 .completed > div {
   text-decoration: line-through;
   color: gray;
+}
+.remove {
+  font-size: 1em;
+  font-weight: bold;
+  color: red;
+  border: 0;
+  background: transparent;
 }
 </style>

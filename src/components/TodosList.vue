@@ -1,7 +1,7 @@
 <template>
   <ul>
     <TodoItem
-      v-for="(todo, index) in todos"
+      v-for="(todo, index) in filteredTodos"
       :todo="todo"
       :index="index"
       :key="index"
@@ -11,12 +11,13 @@
 
 <script>
 import TodoItem from "./TodoItem";
-import { mapState } from "vuex";
+import { mapState, mapGetters } from "vuex";
 
 export default {
   name: "TodoList",
   computed: {
-    ...mapState(["todos"])
+    ...mapState(["todos"]),
+    ...mapGetters(["filteredTodos"])
   },
   components: {
     TodoItem
