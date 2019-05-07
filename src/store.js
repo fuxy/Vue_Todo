@@ -22,17 +22,17 @@ export default new Vuex.Store({
       return result.length;
     },
     activeTodos: state => {
-      let result = state.todos.filter(todo => todo.completed == false);
+      let result = state.todos.filter(todo => todo.completed === false);
       return result.length;
     },
     filteredTodos: state => {
       console.log(state.todos);
       switch (state.filter) {
         case "active":
-          return state.todos.filter(todo => todo.completed == false);
+          return state.todos.filter(todo => todo.completed === false);
           break;
         case "completed":
-          return state.todos.filter(todo => todo.completed == true);
+          return state.todos.filter(todo => todo.completed === true);
           break;
         default:
           return state.todos;
@@ -63,7 +63,19 @@ export default new Vuex.Store({
   },
   actions: {
     removeTodo(context, todo) {
-      context.commit("REMOVE_TODO", todo);
+      this.state.loading = true;
+      firebase
+        .database()
+        .ref("todos")
+        .child(this.state.todos[todo].id)
+        .remove()
+        .then(() => {
+          context.commit("REMOVE_TODO", todo);
+        })
+        .catch(errors => {
+          console.log(errors);
+        });
+      this.state.loading = false;
     },
     completeAll({ commit }) {
       return new Promise((resolve, reject) => {

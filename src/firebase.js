@@ -1,12 +1,13 @@
 import { initializeApp } from "firebase";
+require("dotenv").config();
 
 const app = initializeApp({
-  apiKey: "AIzaSyCt-zYtor3pKa0tdoxW-XpohkVMusUPljo",
-  authDomain: "vuevuextodolist.firebaseapp.com",
-  databaseURL: "https://vuevuextodolist.firebaseio.com",
-  projectId: "vuevuextodolist",
+  apiKey: process.env.FIREBASE_API_KEY,
+  authDomain: process.env.FIREBASE_AUTH_DOMAIN,
+  databaseURL: process.env.FIREBASE_DATABASE_URL,
+  projectId: process.env.FIREBASE_PROJECT_ID,
   storageBucket: "",
-  messagingSenderId: "138475429666"
+  messagingSenderId: process.env.FIREBASE_MESSAGING_SENDER_ID
 });
 
 export const db = app.database();
