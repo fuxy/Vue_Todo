@@ -1,11 +1,11 @@
 <template>
   <form v-on:submit="addTodo">
-    <input type="text" v-model="newTodo" placeholder="Add todo" />
+    <input type="text" v-model="newTodo" placeholder="Add todo">
   </form>
 </template>
 
 <script>
-import { mapState, mapMutations } from "vuex";
+import { mapMutations } from "vuex";
 
 export default {
   name: "AddTodoForm",

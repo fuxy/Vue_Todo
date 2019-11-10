@@ -18,7 +18,7 @@ export default new Vuex.Store({
       return state.todos.length;
     },
     completedTodos: state => {
-      let result = state.todos.filter(todo => todo.completed == true);
+      let result = state.todos.filter(todo => todo.completed === true);
       return result.length;
     },
     activeTodos: state => {
@@ -47,6 +47,7 @@ export default new Vuex.Store({
         .ref("todos")
         .push({ title: todo, completed: false });
     },
+    TOGGLE_TODO: (state, todo) => {},
     REMOVE_TODO: (state, todo) => {
       state.todos.splice(todo, 1);
     },
@@ -62,6 +63,21 @@ export default new Vuex.Store({
     }
   },
   actions: {
+    toggleTodo(context, todo) {
+      this.state.loading = true;
+      firebase
+        .database()
+        .ref("todos")
+        .child(this.state.todos[todo].id)
+        .update({ completed: !this.state.todos[todo].completed })
+        .then(() => {
+          context.commit("TOGGLE_TODO", todo);
+        })
+        .catch(errors => {
+          console.log(errors);
+        });
+      this.state.loading = false;
+    },
     removeTodo(context, todo) {
       this.state.loading = true;
       firebase
@@ -78,12 +94,13 @@ export default new Vuex.Store({
       this.state.loading = false;
     },
     completeAll({ commit }) {
-      return new Promise((resolve, reject) => {
-        setTimeout(() => {
-          commit("COMPLETE_ALL");
-          resolve();
-        }, 0);
+      this.state.loading = true;
+      const ref = firebase.database().ref("todos");
+      this.state.todos.forEach(todo => {
+        todo.completed = true;
+        ref.child(todo.id).update(todo);
       });
+      this.state.loading = false;
     },
     loadTodos({ commit }) {
       this.state.loading = true;

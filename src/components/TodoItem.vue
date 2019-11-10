@@ -1,7 +1,7 @@
 <template>
   <li v-bind:class="{ completed: todo.completed }">
     <div>
-      <input type="checkbox" v-model="todo.completed" />
+      <input type="checkbox" v-on:click="toggle(index);" v-model="todo.completed">
       <div>{{ todo.title }}</div>
     </div>
     <button class="remove" v-on:click="remove(index);">&times;</button>
@@ -9,15 +9,18 @@
 </template>
 
 <script>
-import { mapState, mapMutations, mapActions } from "vuex";
+import { mapActions } from "vuex";
 
 export default {
   name: "TodoItem",
   props: ["todo", "index"],
   methods: {
-    ...mapActions(["removeTodo"]),
+    ...mapActions(["removeTodo", "toggleTodo"]),
     remove: function(index) {
       this.removeTodo(index);
+    },
+    toggle: function(index) {
+      this.toggleTodo(index);
     }
   }
 };
