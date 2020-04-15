@@ -26,7 +26,6 @@ export default new Vuex.Store({
       return result.length;
     },
     filteredTodos: state => {
-      console.log(state.todos);
       switch (state.filter) {
         case "active":
           return state.todos.filter(todo => todo.completed === false);
